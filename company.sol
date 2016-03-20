@@ -1,10 +1,11 @@
 contract Company {
 	address public ceo;
 
-	mapping (address => Employee)
+	mapping (address => Employee) public employees;
 	struct Employee
 	{
-		uint dailySalary;
+		uint salary;
+		bytes32 name;
 	}
 
 	function Company()
@@ -14,7 +15,10 @@ contract Company {
 
 	function withdraw(uint amount)
 	{
-		if(amount / 1000 > this.balance) throw;
-		if(msg.sender == ceo) ceo.send(amount / 1000);
+		if(amount > this.balance) throw;
+		if(msg.sender == ceo) ceo.send(amount);
+	}
+
+	function hire(address onboardingAddress, uint salary) {
 	}
 }
