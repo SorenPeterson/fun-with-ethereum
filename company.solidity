@@ -1,0 +1,7 @@
+contract Company {
+	address public ceo;
+
+	function Company() {
+		ceo = msg.sender;
+	}
+}
