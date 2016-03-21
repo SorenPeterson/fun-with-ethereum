@@ -9,6 +9,7 @@ contract Agreement {
 
 	function request() {
 		if(msg.sender == soren) {
+			soren.send(this.balance);
 		}
 	}
 }
