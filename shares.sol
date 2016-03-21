@@ -21,7 +21,11 @@ contract Shares {
 	function exchange() {
 		while(exchangeCount[msg.sender] < splitCount) {
 			shareOfTotal[msg.sender] *= 2;
-			exchangeCount[msg.sender += 1;
+			exchangeCount[msg.sender] += 1;
 		}
+	}
+
+	function yourShares() returns(uint) {
+		return shareOfTotal[msg.sender];
 	}
 }
