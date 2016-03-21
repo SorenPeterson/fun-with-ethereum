@@ -25,7 +25,7 @@ contract Shares {
 		}
 	}
 
-	function yourShares() returns(uint) {
+	function yourShares() returns (uint shares) {
 		return shareOfTotal[msg.sender];
 	}
 }
