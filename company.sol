@@ -1,24 +1,14 @@
-contract Company {
-	address public ceo;
+contract Agreement {
+	address public soren;
+	address public raymond;
 
-	mapping (address => Employee) public employees;
-	struct Employee
-	{
-		uint salary;
-		bytes32 name;
+	function Agreement(address _raymond) {
+		soren = msg.sender;
+		raymond = _raymond;
 	}
 
-	function Company()
-	{
-		ceo = msg.sender;
-	}
-
-	function withdraw(uint amount)
-	{
-		if(amount > this.balance) throw;
-		if(msg.sender == ceo) ceo.send(amount);
-	}
-
-	function hire(address onboardingAddress, uint salary) {
+	function request() {
+		if(msg.sender == soren) {
+		}
 	}
 }
