@@ -1,15 +1,27 @@
 contract Shares {
-    mapping (address => uint) public shareOfTotal;
-    int public total;
-    
-    int public splitCount;
-    mapping (address => SplitVote) public splitVotes;
-    struct SplitVote {
-        uint count;
-    }
-    
-    function Shares(uint, _initialShares) {
-        numberOfShares[msg.sender] = _initialShares
-        total 
-    }
+	mapping (address => uint) shareOfTotal;
+	mapping (address => uint) exchangeCount;
+	uint public splitCount;
+	uint public total;
+
+	address public owner;
+
+	function Shares(uint _initialShares) {
+		total = _initialShares;
+		owner = msg.sender;
+		shareOfTotal[owner] = total;
+	}
+
+	function split() {
+		if(msg.sender != owner) throw;
+		total *= 2;
+		splitCount += 1;
+	}
+
+	function exchange() {
+		while(exchangeCount[msg.sender] < splitCount) {
+			shareOfTotal[msg.sender] *= 2;
+			exchangeCount[msg.sender += 1;
+		}
+	}
 }
