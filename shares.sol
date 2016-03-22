@@ -41,4 +41,10 @@ contract Shares {
 	function yourShares() returns (uint shares) {
 		return shareOfTotal[msg.sender];
 	}
+
+	function transferShares(address _to, uint amount) {
+		if(shareOfTotal[msg.sender] < amount) throw;
+		shareOfTotal[_to] += amount;
+		shareOfTotal[msg.sender] -= amount;
+	}
 }
