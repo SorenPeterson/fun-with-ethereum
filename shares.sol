@@ -6,6 +6,19 @@ contract Shares {
 
 	address public owner;
 
+	enum OrderType {
+		BUY,
+		SELL
+	}
+
+	struct Link {
+		uint amount;
+		uint price;
+		Link left;
+		Link right;
+	}
+	Link public root;
+
 	function Shares(uint _initialShares) {
 		total = _initialShares;
 		owner = msg.sender;
