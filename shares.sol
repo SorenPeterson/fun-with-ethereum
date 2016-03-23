@@ -5,19 +5,13 @@ contract Shares {
 	uint public total;
 
 	address public owner;
-
-	enum OrderType {
-		BUY,
-		SELL
-	}
-
-	struct Link {
+	
+	struct Sale {
 		uint amount;
 		uint price;
-		Link left;
-		Link right;
+		bool completed;
 	}
-	Link public root;
+	mapping (address => Sale) sales;
 
 	function Shares(uint _initialShares) {
 		total = _initialShares;
@@ -46,5 +40,23 @@ contract Shares {
 		if(shareOfTotal[msg.sender] < amount) throw;
 		shareOfTotal[_to] += amount;
 		shareOfTotal[msg.sender] -= amount;
+	}
+	
+	function sell(uint _amount, uint _price) {
+		if(_amount > shareOfTotal[msg.sender]) throw;
+		sales[msg.sender] = Sale({
+			price: _price,
+			amount: _amount,
+			completed: true
+		})
+	}
+	
+	function buy(address _seller) {
+		if(msg.value != sales[_seller].price) throw;
+		if(sales[_seller].completed) throw;
+		uint amount = sales[_seller].amount;
+		_seller.send(msg.value);
+		shareOfTotal[msg.sender] += amount;
+		shareOfTotal[_seller] -= amount;
 	}
 }
