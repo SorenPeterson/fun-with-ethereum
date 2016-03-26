@@ -10,8 +10,11 @@ contract Shares {
 		uint amount;
 		uint price;
 		bool completed;
+		address seller;
+		uint next;
 	}
-	mapping (address => Sale) sales;
+	mapping (uint => Sale) sales;
+	uint public root;
 
 	function Shares(uint _initialShares) {
 		total = _initialShares;
