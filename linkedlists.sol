@@ -1,18 +1,28 @@
 contract LinkedLists {
   struct Link {
-    uint next;
     bytes data;
+    uint next;
   }
 
   mapping (uint => Link) public list;
   Link public root;
+  Link public last;
+  uint public count;
 
-  function () {
+  function Link() {
+    count = 0;
   }
 
-  function append() {
+  function () {
+    throw;
+  }
+
+  function append(bytes data) {
     if(!root) {
-      root
+      root = Link(data)
+      last = root
+      list[0] = root
+    } else {
     }
   }
 }
